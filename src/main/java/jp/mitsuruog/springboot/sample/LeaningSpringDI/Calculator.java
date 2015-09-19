@@ -1,4 +1,4 @@
-package jp.mitsuruog.springboot.sample.service;
+package jp.mitsuruog.springboot.sample.LeaningSpringDI;
 
 /**
  * Created by mitsuruog on 15/09/19.

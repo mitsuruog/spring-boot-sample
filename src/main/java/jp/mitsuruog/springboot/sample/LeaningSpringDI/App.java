@@ -1,17 +1,10 @@
-package jp.mitsuruog.springboot.sample;
+package jp.mitsuruog.springboot.sample.LeaningSpringDI;
 
-import jp.mitsuruog.springboot.sample.service.ArgumentResolver;
-import jp.mitsuruog.springboot.sample.service.CalculationArgument;
-import jp.mitsuruog.springboot.sample.service.Calculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Import;
-
-import java.util.Scanner;
 
 /**
  * Created by mitsuruog on 15/09/19.

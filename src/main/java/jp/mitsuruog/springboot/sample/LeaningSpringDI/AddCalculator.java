@@ -1,4 +1,4 @@
-package jp.mitsuruog.springboot.sample.service;
+package jp.mitsuruog.springboot.sample.LeaningSpringDI;
 
 import org.springframework.stereotype.Component;
 
