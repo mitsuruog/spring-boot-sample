@@ -3,6 +3,8 @@ package jp.mitsuruog.springboot.sample;
 import jp.mitsuruog.springboot.sample.service.ArgumentResolver;
 import jp.mitsuruog.springboot.sample.service.CalculationArgument;
 import jp.mitsuruog.springboot.sample.service.Calculator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -19,17 +21,26 @@ import java.util.Scanner;
 // 対象は@Component, @Service, @Repository, @Controllerなど、、、などって何だ？？
 // basePackagesで対象を変えることができる。
 @ComponentScan
-public class App {
+public class App implements CommandLineRunner {
+
+    // @Autowiredするとcontext.getBean()を自動で行ってくれる
+    @Autowired
+    Calculator calculator;
+    @Autowired
+    ArgumentResolver argumentResolver;
+
+    @Override
+    public void run(String... args) throws Exception {
+        System.out.print("Enter 2 number like 'a b' :");
+
+        CalculationArgument argument = argumentResolver.resolve(System.in);
+        int result = calculator.calculate(argument.getA(), argument.getB());
+
+        System.out.println("result = " + result);
+    }
 
     public static void main(String[] args) {
-
-        try(ConfigurableApplicationContext context = SpringApplication.run(App.class, args)) {
-
-            Fronted fronted = context.getBean(Fronted.class);
-            fronted.run();
-
-        }
-
+        SpringApplication.run(App.class, args);
     }
 
 }
