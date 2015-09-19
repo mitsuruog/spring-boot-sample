@@ -32,6 +32,7 @@ repositories {
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-jdbc")
     compile("org.projectlombok:lombok:1.16.6")
+    compile("org.lazyluke:log4jdbc-remix:0.2.7")
 
     runtime("com.h2database:h2")
 
