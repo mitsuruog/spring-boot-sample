@@ -1,7 +1,9 @@
 package jp.mitsuruog.springboot.sample;
 
 import jp.mitsuruog.springboot.sample.service.AddCalculator;
+import jp.mitsuruog.springboot.sample.service.ArgumentResolver;
 import jp.mitsuruog.springboot.sample.service.Calculator;
+import jp.mitsuruog.springboot.sample.service.ScannerCalculationArgumentResolver;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,4 +19,8 @@ public class AppConfig {
         return new AddCalculator();
     }
 
+    @Bean
+    ArgumentResolver argumentResolver() {
+        return new ScannerCalculationArgumentResolver();
+    }
 }
