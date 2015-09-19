@@ -23,4 +23,9 @@ public class AppConfig {
     ArgumentResolver argumentResolver() {
         return new ScannerCalculationArgumentResolver();
     }
+
+    @Bean
+    Fronted fronted() {
+        return new Fronted();
+    }
 }
