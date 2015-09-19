@@ -15,7 +15,10 @@ import java.util.Scanner;
  * Created by mitsuruog on 15/09/19.
  */
 @EnableAutoConfiguration
-@Import(AppConfig.class)
+// @ComponentScanを付けるとこのクラスと同じパッケージ以下のスキャンする。
+// 対象は@Component, @Service, @Repository, @Controllerなど、、、などって何だ？？
+// basePackagesで対象を変えることができる。
+@ComponentScan
 public class App {
 
     public static void main(String[] args) {

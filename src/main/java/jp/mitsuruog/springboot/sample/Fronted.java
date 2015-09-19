@@ -4,11 +4,13 @@ import jp.mitsuruog.springboot.sample.service.ArgumentResolver;
 import jp.mitsuruog.springboot.sample.service.CalculationArgument;
 import jp.mitsuruog.springboot.sample.service.Calculator;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by mitsuruog on 15/09/19.
  */
 
+@Component
 public class Fronted {
 
     // @Autowiredするとcontext.getBean()を自動で行ってくれる
