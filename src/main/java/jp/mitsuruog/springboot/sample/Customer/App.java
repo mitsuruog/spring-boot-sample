@@ -37,14 +37,6 @@ public class App implements CommandLineRunner{
         Integer result = jdbcTemplate.queryForObject(sql, parameter, Integer.class);
         System.out.println("result -> " + result);
 
-//        // 追加
-//        customerService.save(new Customer(1, "Mae", "Matthews"));
-//        customerService.save(new Customer(2, "Antonio", "Carr"));
-//        customerService.save(new Customer(3, "Ralph", "Henderson"));
-//
-//        // データ表示
-//        customerService.findAll().forEach((x) -> System.out.println(x));
-
     }
 
     public static void main(String[] args) {
