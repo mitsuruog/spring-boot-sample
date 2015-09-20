@@ -3,6 +3,9 @@ package jp.mitsuruog.springboot.sample.Customer.api;
 import jp.mitsuruog.springboot.sample.Customer.domain.Customer;
 import jp.mitsuruog.springboot.sample.Customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +26,11 @@ public class CustomerRestController {
     @Autowired
     CustomerService customerService;
 
+    // @PageableDefaultのデフォルトはpage=0, size=20
+    // リクエストパラメータでページングは制御できる。（例）?page=1&size=20とか
     @RequestMapping(method = RequestMethod.GET)
-    List<Customer> getCustomers() {
-        List<Customer> customers = customerService.findAll();
+    Page<Customer> getCustomers(@PageableDefault(size = 3) Pageable pageable) {
+        Page<Customer> customers = customerService.findAll(pageable);
         return customers;
     }
 
