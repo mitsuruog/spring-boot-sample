@@ -1,10 +1,10 @@
 package jp.mitsuruog.springboot.sample.Customer.repository;
 
 import jp.mitsuruog.springboot.sample.Customer.domain.Customer;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
-import java.util.List;
 
 /**
  * Created by mitsuruog on 15/09/20.
@@ -14,7 +14,8 @@ import java.util.List;
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
     // ここは生SQLではなくJPQLというものらしい。なのでCustomerクラスを指定している
+    // ページング処理を行うためにPageableを渡して、戻りをPage<T>に変更する
     @Query("SELECT x FROM Customer x ORDER BY x.firstName, x.lastName")
-    List<Customer> findAllOrderByName();
+    Page<Customer> findAllOrderByName(Pageable pageable);
 
 }
