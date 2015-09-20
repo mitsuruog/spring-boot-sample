@@ -3,10 +3,14 @@ package jp.mitsuruog.springboot.sample.Customer.api;
 import jp.mitsuruog.springboot.sample.Customer.domain.Customer;
 import jp.mitsuruog.springboot.sample.Customer.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.websocket.server.PathParam;
+import java.net.URI;
 import java.util.List;
 
 /**
@@ -35,10 +39,18 @@ public class CustomerRestController {
 
     // デフォルトのContent-Typeはapplication/jsonみたい。。。
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    Customer createCustomer(@RequestBody Customer customer) {
+    ResponseEntity<Customer> createCustomer(@RequestBody Customer customer, UriComponentsBuilder uriBuilder) {
         Customer created = customerService.create(customer);
-        return created;
+
+        // 作成したリソースへのURIをLocationヘッダで返却する
+        URI location = uriBuilder.path("api/customers/{id}")
+                .buildAndExpand(created.getId())
+                .toUri();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(location);
+
+        return new ResponseEntity<>(created, headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
