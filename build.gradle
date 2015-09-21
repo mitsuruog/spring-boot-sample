@@ -54,4 +54,8 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
+springBoot {
+    mainClass = "jp.mitsuruog.springboot.sample.Customer.App"
+}
+
 defaultTasks = ["clean", "build"]
