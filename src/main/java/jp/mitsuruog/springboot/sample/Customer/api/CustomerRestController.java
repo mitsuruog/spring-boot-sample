@@ -9,6 +9,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -44,7 +45,7 @@ public class CustomerRestController {
 
     // デフォルトのContent-Typeはapplication/jsonみたい。。。
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<Customer> createCustomer(@RequestBody Customer customer, UriComponentsBuilder uriBuilder) {
+    ResponseEntity<Customer> createCustomer(@Validated @RequestBody Customer customer, UriComponentsBuilder uriBuilder) {
         Customer created = customerService.create(customer);
 
         // 作成したリソースへのURIをLocationヘッダで返却する
@@ -59,7 +60,7 @@ public class CustomerRestController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    Customer updateCustomer(@PathVariable Integer id, @RequestBody Customer customer) {
+    Customer updateCustomer(@PathVariable Integer id, @Validated @RequestBody Customer customer) {
         customer.setId(id);
         Customer updated = customerService.update(customer);
         return customer;
