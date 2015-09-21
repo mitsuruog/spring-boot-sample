@@ -76,4 +76,9 @@ public class CustomerController {
         customerService.update(customer);
         return "redirect:/customers";
     }
+
+    @RequestMapping(value = "edit", params = "backToList")
+    String backToList() {
+        return "redirect:/customers";
+    }
 }
