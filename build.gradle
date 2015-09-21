@@ -54,6 +54,8 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
+task stage
+
 springBoot {
     mainClass = "jp.mitsuruog.springboot.sample.Customer.App"
 }
