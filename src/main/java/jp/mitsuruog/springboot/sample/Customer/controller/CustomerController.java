@@ -10,9 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by mitsuruog on 15/09/20.
@@ -56,4 +54,26 @@ public class CustomerController {
         return "redirect:/customers";
     }
 
+    // paramを指定することで「?form&id=1」でアクセスされた場合に動作するようにしている
+    @RequestMapping(value = "edit", params = "form", method = RequestMethod.GET)
+    String edit(@RequestParam Integer id, CustomerForm form) {
+        // 顧客取得する時にサーバー側でワンクッションしているあたりが、サーバーサイドレンダリング。懐かしい感じだ。。。
+        Customer targetCustomer = customerService.findById(id);
+        BeanUtils.copyProperties(targetCustomer, form);
+        // 編集画面に遷移する
+        return "customers/edit";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.POST)
+    String update(@RequestParam Integer id, @Validated CustomerForm form, BindingResult result) {
+        if(result.hasErrors()) {
+            // エラーがあった場合は、edit()を実行して編集画面に戻る
+            return edit(id, form);
+        }
+        Customer customer = new Customer();
+        BeanUtils.copyProperties(form, customer);
+        customer.setId(id);
+        customerService.update(customer);
+        return "redirect:/customers";
+    }
 }
