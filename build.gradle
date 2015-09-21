@@ -18,8 +18,8 @@ apply plugin: 'spring-boot'
 apply plugin: 'io.spring.dependency-management' 
 
 jar {
-    baseName = 'sample'
-    version = '0.0.1-SNAPSHOT'
+    baseName = 'mitsuruog-springboot-sample'
+    version = '0.0.1'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8

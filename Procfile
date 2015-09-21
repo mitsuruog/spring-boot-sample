@@ -1,1 +1,1 @@
-web: java $JAVA_OPTS -jar target/*.jar --server.port=$PORT
+web: java $JAVA_OPTS -jar build/libs/mitsuruog-springboot-sample-0.0.1.jar --server.port=$PORT
