@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
 <head>
-    <meta charset="UTF-8"/>
     <title>顧客一覧</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-    <div>
+    <div layout:fragment="content">
         <!--/* th:objectはModelの属性名だとさ。。。 */-->
         <form th:action="@{/customers/create}" th:object="${customerForm}" method="post">
             <div>
@@ -23,26 +21,26 @@
             </div>
             <input type="submit" value="作成"/>
         </form>
+        <table>
+            <tr th:each="customer: ${customers}">
+                <td th:text="${customer.id}">100</td>
+                <td th:text="${customer.lastName}">山田</td>
+                <td th:text="${customer.firstName}">太郎</td>
+                <td>
+                    <!--/* @{}と指定すると相対パス指定にできる */-->
+                    <form th:action="@{/customers/edit}" method="get">
+                        <input type="submit" name="form" value="編集"/>
+                        <input type="hidden" name="id" th:value="${customer.id}"/>
+                    </form>
+                </td>
+                <td>
+                    <form th:action="@{/customers/delete}" method="post">
+                        <input type="submit" value="削除"/>
+                        <input type="hidden" name="id" th:value="${customer.id}"/>
+                    </form>
+                </td>
+            </tr>
+        </table>
     </div>
-    <table>
-        <tr th:each="customer: ${customers}">
-            <td th:text="${customer.id}">100</td>
-            <td th:text="${customer.lastName}">山田</td>
-            <td th:text="${customer.firstName}">太郎</td>
-            <td>
-                <!--/* @{}と指定すると相対パス指定にできる */-->
-                <form th:action="@{/customers/edit}" method="get">
-                    <input type="submit" name="form" value="編集"/>
-                    <input type="hidden" name="id" th:value="${customer.id}"/>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{/customers/delete}" method="post">
-                    <input type="submit" value="削除"/>
-                    <input type="hidden" name="id" th:value="${customer.id}"/>
-                </form>
-            </td>
-        </tr>
-    </table>
 </body>
 </html>
