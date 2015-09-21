@@ -53,3 +53,5 @@ eclipse {
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
+
+defaultTasks = ["clean", "build"]
