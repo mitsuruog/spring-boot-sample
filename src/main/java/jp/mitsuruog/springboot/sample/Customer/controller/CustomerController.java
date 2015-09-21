@@ -81,4 +81,11 @@ public class CustomerController {
     String backToList() {
         return "redirect:/customers";
     }
+
+    @RequestMapping(value = "delete", method = RequestMethod.POST)
+    String delete(@RequestParam Integer id) {
+        customerService.delete(id);
+        return "redirect:/customers";
+    }
+
 }
