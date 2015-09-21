@@ -32,7 +32,7 @@
             <td>
                 <!--/* @{}と指定すると相対パス指定にできる */-->
                 <form th:action="@{/customers/edit}" method="get">
-                    <input type="submit" value="編集"/>
+                    <input type="submit" name="form" value="編集"/>
                     <input type="hidden" name="id" th:value="${customer.id}"/>
                 </form>
             </td>
