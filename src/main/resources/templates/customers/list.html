@@ -5,6 +5,24 @@
     <title>顧客一覧</title>
 </head>
 <body>
+    <div>
+        <!--/* th:objectはModelの属性名だとさ。。。 */-->
+        <form th:action="@{/customers/create}" th:object="${customerForm}" method="post">
+            <div>
+                <label>姓</label>
+                <!--/* th:fieid="*{属性名}"でth:objectのフォールドにセットされる */-->
+                <input type="text" name="lastName" th:field="*{lastName}" th:errorClass="error-input"/>
+                <!--/* エラーの参照は${#fields.hasErrors('属性名')}にあるだとさ・・・ */-->
+                <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></span>
+            </div>
+            <div>
+                <label>名</label>
+                <input type="text" name="firstName" th:field="*{firstName}" th:errorClass="error-input"/>
+                <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></span>
+            </div>
+            <input type="submit" value="作成"/>
+        </form>
+    </div>
     <table>
         <tr th:each="customer: ${customers}">
             <td th:text="${customer.id}">100</td>
