@@ -28,4 +28,7 @@ public class Customer {
     @Size(min = 1, max = 127)
     @Column(nullable = false)
     private String lastName;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(nullable = true, name = "username")
+    private User user;
 }
