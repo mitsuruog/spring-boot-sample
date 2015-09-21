@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>顧客情報編集</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+<div>
+    <form th:action="@{/customers/edit}" th:object="${customerForm}" method="post">
+        <div>
+            <label>姓</label>
+            <input type="text" name="lastName" th:field="*{lastName}" th:errorClass="error-input"/>
+            <span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="error-message"></span>
+        </div>
+        <div>
+            <label>名</label>
+            <input type="text" name="firstName" th:field="*{firstName}" th:errorClass="error-input"/>
+            <span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="error-message"></span>
+        </div>
+        <!--/* name="backToList"でContorllerのbackToListが実行される */-->
+        <input type="submit" name="backToList" value="戻る"/>
+        <!--/* param.パラメータ名でリクエストパラメータにアクセスできる。型がString[]であることに注意 */-->
+        <input type="hidden" name="id" th:value="${param.id[0]}"/>
+        <input type="submit" value="更新"/>
+    </form>
+</div>
+</body>
+</html>
