@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <title>ログイン</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <form th:action="@{/login}" method="post">
+        <div>
+            <label>ユーザーID</label>
+            <input type="text" name="usename" required="required"/>
+        </div>
+        <div>
+            <label>パスワード</label>
+            <input type="password" name="password" required="required"/>
+        </div>
+        <div>
+            <span th:if="${param.error}" class="error-message">ユーザーIDとパスワードが一致しません。</span>
+        </div>
+        <input type="submit" value="ログイン"/>
+    </form>
+</div>
+</body>
+</html>
