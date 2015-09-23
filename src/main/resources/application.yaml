@@ -1,8 +1,10 @@
 spring:
     datasource:
         driverClassName: org.h2.Driver
-        url: jdbc:h2:mem:sampleDB;DB_CLOSE_ON_EXIT=FALSE
+        url: jdbc:h2:file:./.data/sample
         username: sa
         password:
+    jpa:
+        hibernate.ddl-auto: validate
     thymeleaf:
         cache: false
