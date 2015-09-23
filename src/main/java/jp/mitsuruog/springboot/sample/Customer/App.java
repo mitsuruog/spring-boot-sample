@@ -24,11 +24,11 @@ public class App implements CommandLineRunner{
     @Override
     public void run(String... args) throws Exception {
 
-        customerRepository.save(new Customer(null, "Mae", "Matthews"));
-        customerRepository.save(new Customer(null, "Antonio", "Carr"));
-        customerRepository.save(new Customer(null, "Ralph", "Henderson"));
-        customerRepository.save(new Customer(null, "Ted", "Fowler"));
-        customerRepository.save(new Customer(null, "Mitsuru", "Ogawa"));
+//        customerRepository.save(new Customer(null, "Mae", "Matthews"));
+//        customerRepository.save(new Customer(null, "Antonio", "Carr"));
+//        customerRepository.save(new Customer(null, "Ralph", "Henderson"));
+//        customerRepository.save(new Customer(null, "Ted", "Fowler"));
+//        customerRepository.save(new Customer(null, "Mitsuru", "Ogawa"));
 
         customerRepository.findAll().forEach(customer -> System.out.println(customer));
 
