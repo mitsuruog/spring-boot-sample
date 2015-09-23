@@ -2,6 +2,7 @@ package jp.mitsuruog.springboot.sample.Customer.api;
 
 import jp.mitsuruog.springboot.sample.Customer.domain.Customer;
 import jp.mitsuruog.springboot.sample.Customer.service.CustomerService;
+import jp.mitsuruog.springboot.sample.Customer.service.LoginUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,6 +10,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.web.bind.annotation.AuthenticationPrincipal;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -45,8 +47,9 @@ public class CustomerRestController {
 
     // デフォルトのContent-Typeはapplication/jsonみたい。。。
     @RequestMapping(method = RequestMethod.POST)
-    ResponseEntity<Customer> createCustomer(@Validated @RequestBody Customer customer, UriComponentsBuilder uriBuilder) {
-        Customer created = customerService.create(customer);
+    ResponseEntity<Customer> createCustomer(@Validated @RequestBody Customer customer, UriComponentsBuilder uriBuilder,
+                                            @AuthenticationPrincipal LoginUserDetails loginUser) {
+        Customer created = customerService.create(customer, loginUser.getUser());
 
         // 作成したリソースへのURIをLocationヘッダで返却する
         URI location = uriBuilder.path("api/customers/{id}")
@@ -60,9 +63,10 @@ public class CustomerRestController {
     }
 
     @RequestMapping(value = "{id}", method = RequestMethod.PUT)
-    Customer updateCustomer(@PathVariable Integer id, @Validated @RequestBody Customer customer) {
+    Customer updateCustomer(@PathVariable Integer id, @Validated @RequestBody Customer customer,
+                            @AuthenticationPrincipal LoginUserDetails loginUser) {
         customer.setId(id);
-        Customer updated = customerService.update(customer);
+        Customer updated = customerService.update(customer, loginUser.getUser());
         return customer;
     }
 

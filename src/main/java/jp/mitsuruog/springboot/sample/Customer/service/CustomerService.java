@@ -1,6 +1,7 @@
 package jp.mitsuruog.springboot.sample.Customer.service;
 
 import jp.mitsuruog.springboot.sample.Customer.domain.Customer;
+import jp.mitsuruog.springboot.sample.Customer.domain.User;
 import jp.mitsuruog.springboot.sample.Customer.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -26,11 +27,13 @@ public class CustomerService {
         return customerRepository.findOne(id);
     }
 
-    public Customer create(Customer customer) {
+    public Customer create(Customer customer, User user) {
+        customer.setUser(user);
         return customerRepository.save(customer);
     }
 
-    public Customer update(Customer customer) {
+    public Customer update(Customer customer, User user) {
+        customer.setUser(user);
         return customerRepository.save(customer);
     }
 
